@@ -27,9 +27,6 @@ int main(){
   cout << "Ingrese la primera fila del salón: ";
   cin >> fila;
   
-  for(int i = 0; i < fila.length(); i++){
-    cout << fila[i] << " " ;
-  }
   cout << endl;
 
   size = fila.length();
@@ -59,7 +56,8 @@ void validar(char** matriz, int size){
         nuevaMatriz[i][j] = '^';
       }
     }
-  } 
+  }
+
 
 }
 
@@ -76,7 +74,14 @@ char** crearMatriz(int size){
 void initMatriz(char** matriz, int size, string fila){
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
-      matriz[i][j] = fila[i];
+      //matriz[i][j] = fila[i];
+    }
+  }
+
+  for(int i = 0; i < size; i++){
+    if(fila[i] == '.' && fila[i+1] == '.'){
+      cout << "Seguro\n";
+      matriz[i][i++] = 'o';
     }
   }
 }
