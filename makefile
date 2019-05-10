@@ -1,5 +1,5 @@
-main: main.o
-    g++ main.o -o main
+main: lab4.o
+  g++ lab4.o -o main
 
-main.o: lab4.cpp
-    g++ -c lab4.cpp
+lab4.o: lab4.cpp
+  g++ -c lab4.cpp
