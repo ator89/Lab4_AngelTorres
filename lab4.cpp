@@ -6,15 +6,15 @@ using std::endl;
 using std::string;
 
 //Crear Matriz de caracteres
-char** crearMatriz(int);
+char** crearMatriz(int,int);
 //Inicializar matriz
-void initMatriz(char**,int,string);
+void initMatriz(char**,int,int);
 //Imprimir Matriz
-void printMatriz(char**,int);
+void printMatriz(char**,int,int);
 //Liberar Matriz
 void liberarMatriz(char**&,int);
 
-void validar(char**,int);
+void resolver(char**,int,int);
 
 //Menu principal
 void menu();
@@ -24,7 +24,7 @@ int main(){
   int opcionMenu = -1;
 
   int size = -1;
-  int cantidadFilas = 0;
+  int columnas = 0;
 
   char** matriz = NULL;
 
@@ -39,17 +39,17 @@ int main(){
           cout << "Ingrese la primera fila del salón: ";
           cin >> primeraFila;
 
-          cout << "Ingrese la cantidad de filas: ";
-          cin >> cantidadFilas;
+          cout << "Ingrese la cantidad de columnas: ";
+          cin >> columnas;
 
           cout << endl;
 
           size = primeraFila.length();
 
 
-          matriz = crearMatriz(size);
-          initMatriz(matriz,size,primeraFila);
-          printMatriz(matriz,size);
+          matriz = crearMatriz(size,columnas);
+          initMatriz(matriz,size,columnas);
+          printMatriz(matriz,size,columnas);
         }
         break;
         case 0://Salir
@@ -67,9 +67,9 @@ int main(){
   return 0;
 }
 
-void validar(char** matriz, int size){
+void resolver(char** matriz, int size, int columnas){
 
-  char** nuevaMatriz = crearMatriz(size);
+  //char** nuevaMatriz = crearMatriz(size);
 
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
@@ -78,9 +78,9 @@ void validar(char** matriz, int size){
       }
       if(matriz[i][j+1] == '.' && matriz[i][j] == '.'){
          cout << "seguro";
-          nuevaMatriz[i][j] = '.';
+          //nuevaMatriz[i][j] = '.';
       }else{
-        nuevaMatriz[i][j] = '^';
+        //nuevaMatriz[i][j] = '^';
       }
     }
   }
@@ -89,48 +89,32 @@ void validar(char** matriz, int size){
 }
 
 //Crear Matriz
-char** crearMatriz(int size){
+char** crearMatriz(int size, int columnas){
   char** matriz = new char*[size];
   for(int i = 0; i < size; i++){
-    matriz[i] = new char[size];
+    matriz[i] = new char[columnas];
   }
   return matriz;
 }
 
 
 //Inicializar matriz
-void initMatriz(char** matriz, int size, string fila){
-  char** nuMatriz = crearMatriz(size);
-
-  for(int i = 0; i < size; i++){
+void initMatriz(char** matriz, int size, int columnas){
+  //char** nuMatriz = crearMatriz(size);
+  //Inicializar azulejos
+  for(int i = 0; i < columnas; i++){
     for(int j = 0; j < size; j++){
-      matriz[i][j] = fila[i];
-
-      if(fila[i] == '.' && fila[i+1] == '.' ){
-      for(int t = 0; t < size; t++){
-        matriz[i][j] = 'x';
-      }}
-
+      matriz[i][j] = '.';
     }
   }
-
-  for(int i = 0; i < size; i++){
-    if(fila[i] == '.' && fila[i+1] == '.'){
-      for(int j = 0; j < size; j++ ){
-        for(int k = 0; k < size; k++){
-          matriz[i][j] = '.';
-        }
-      }
-    }//end if
-  }//end for i
 }
 
 
 
 //Imprimir matriz
-void printMatriz(char** matriz, int size){
+void printMatriz(char** matriz, int size, int columnas){
   for(int i = 0; i < size; i++){
-    for(int j = 0; j < size; j++){
+    for(int j = 0; j < columnas; j++){
       cout << " " << matriz[i][j];
     }
     cout << endl;
@@ -139,8 +123,8 @@ void printMatriz(char** matriz, int size){
 
 
 //Liberar matriz
-void liberarMatriz(char**& matriz, int size){
-  for(int i = 0; i < size; i++){
+void liberarMatriz(char**& matriz, int columnas){
+  for(int i = 0; i < columnas; i++){
     delete[] matriz[i];
     matriz[i] = NULL;
   }
