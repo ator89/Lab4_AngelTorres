@@ -70,21 +70,35 @@ char** crearMatriz(int size){
   return matriz;
 }
 
+
 //Inicializar matriz
 void initMatriz(char** matriz, int size, string fila){
+  char** nuMatriz = crearMatriz(size);
+
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
-      //matriz[i][j] = fila[i];
+      matriz[i][j] = fila[i];
+
+      if(fila[i] == '.' && fila[i+1] == '.' ){
+      for(int t = 0; t < size; t++){
+        matriz[i][j] = 'x';
+      }}
+
     }
   }
 
   for(int i = 0; i < size; i++){
     if(fila[i] == '.' && fila[i+1] == '.'){
-      cout << "Seguro\n";
-      matriz[i][i++] = 'o';
-    }
-  }
+      for(int j = 0; j < size; j++ ){
+        for(int k = 0; k < size; k++){
+          matriz[i][j] = '.';
+        }
+      }
+    }//end if
+  }//end for i
 }
+
+
 
 //Imprimir matriz
 void printMatriz(char** matriz, int size){
@@ -95,6 +109,7 @@ void printMatriz(char** matriz, int size){
     cout << endl;
   }  
 }
+
 
 //Liberar matriz
 void liberarMatriz(char**& matriz, int size){
