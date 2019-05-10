@@ -16,38 +16,65 @@ void liberarMatriz(char**&,int);
 
 void validar(char**,int);
 
+//Menu principal
+void menu();
+
 int main(){
+  bool menuActivo = true;
+  int opcionMenu = -1;
+
   int size = -1;
-  int length = 0;
-  
+  int cantidadFilas = 0;
+
   char** matriz = NULL;
-  
-  string fila;
 
-  cout << "Ingrese la primera fila del salón: ";
-  cin >> fila;
-  
-  cout << endl;
+  string primeraFila;
 
-  size = fila.length();
+  while(menuActivo){
+    do{
+      menu();
+      cin >> opcionMenu;
+      switch (opcionMenu) {
+        case 1:{//Ejercicio 1
+          cout << "Ingrese la primera fila del salón: ";
+          cin >> primeraFila;
+
+          cout << "Ingrese la cantidad de filas: ";
+          cin >> cantidadFilas;
+
+          cout << endl;
+
+          size = primeraFila.length();
 
 
-  matriz = crearMatriz(size);
-  initMatriz(matriz,size,fila);
-  printMatriz(matriz,size);
+          matriz = crearMatriz(size);
+          initMatriz(matriz,size,primeraFila);
+          printMatriz(matriz,size);
+        }
+        break;
+        case 0://Salir
+        break;
+        default:
+          cout << "Ingrse una opción del menú.\n\n";
+        break;
+      }
+    }while(opcionMenu != 0);
+    menuActivo = false;
+  }//Salida while del menú principal
+
   liberarMatriz(matriz,size);
 
   return 0;
 }
 
 void validar(char** matriz, int size){
-  
+
   char** nuevaMatriz = crearMatriz(size);
-  
+
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
       if( j -1 < 0){
-        
+
       }
       if(matriz[i][j+1] == '.' && matriz[i][j] == '.'){
          cout << "seguro";
@@ -107,7 +134,7 @@ void printMatriz(char** matriz, int size){
       cout << " " << matriz[i][j];
     }
     cout << endl;
-  }  
+  }
 }
 
 
@@ -119,4 +146,11 @@ void liberarMatriz(char**& matriz, int size){
   }
   delete[] matriz;
   matriz = NULL;
+}
+
+void menu(){
+  cout << "\t\nMENU\n\n"
+      << "1 - Ejercicio Trampas\n"
+      << "0 - Salir\n"
+      << "Seleccione: ";
 }
