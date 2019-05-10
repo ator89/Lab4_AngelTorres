@@ -49,6 +49,7 @@ int main(){
 
           matriz = crearMatriz(size,columnas);
           initMatriz(matriz,size,columnas);
+          //resolver(matriz,size,columnas);
           printMatriz(matriz,size,columnas);
         }
         break;
@@ -67,24 +68,44 @@ int main(){
   return 0;
 }
 
+//Resolver ejercicio #1
 void resolver(char** matriz, int size, int columnas){
-
-  //char** nuevaMatriz = crearMatriz(size);
-
-  for(int i = 0; i < size; i++){
+  for(int i = 0; i < columnas; i++){
     for(int j = 0; j < size; j++){
-      if( j -1 < 0){
-
+      if (j != 0 || j != columnas - 1){
+          if (matriz[i-1][j] == '^' && matriz[i-1][j-1] == '^' && matriz[i-1][j+1] == '.'){
+              matriz[i][j] = '^';
+                }
+          if (matriz[i-1][j] == '^' && matriz[i-1][j-1] == '.' && matriz[i-1][j+1] == '^'){
+                    matriz[i][j] = '^';
+                }
+          if (matriz[i-1][j] == '.' && matriz[i-1][j-1] == '^' && matriz[i-1][j+1] == '.'){
+                    matriz[i][j] = '^';
+                }
+          if (matriz[i -1][j] == '.' && matriz[i-1][j-1] == '.' && matriz[i-1][j+1] == '^'){
+                    matriz[i][j] = '^';
+          }
       }
-      if(matriz[i][j+1] == '.' && matriz[i][j] == '.'){
-         cout << "seguro";
-          //nuevaMatriz[i][j] = '.';
-      }else{
-        //nuevaMatriz[i][j] = '^';
+      if (j == 0 || j == columnas - 1){
+          if (j == 0){
+              if (matriz[i-1][j] == '^' && matriz[i-1][j+1] == '^'){
+                matriz[i][j] = '^';
+              }
+              if (matriz[i-1][j] == '.' && matriz[i-1][j+1] == '^'){
+                matriz[i][j] = '^';
+              }
+          }
+          if (j == columnas - 1){
+              if (matriz[i -1][j] == '^' && matriz[i-1][j-1] == '^'){
+                matriz[i][j] = '^';
+              }
+              if (matriz[i -1][j] == '.' && matriz[i-1][j-1] == '^'){
+                matriz[i][j] = '^';
+              }
+          }
       }
     }
   }
-
 
 }
 
@@ -102,8 +123,8 @@ char** crearMatriz(int size, int columnas){
 void initMatriz(char** matriz, int size, int columnas){
   //char** nuMatriz = crearMatriz(size);
   //Inicializar azulejos
-  for(int i = 0; i < columnas; i++){
-    for(int j = 0; j < size; j++){
+  for(int i = 0; i < size; i++){
+    for(int j = 0; j < columnas; j++){
       matriz[i][j] = '.';
     }
   }
