@@ -70,36 +70,22 @@ int main(){
 
 //Resolver ejercicio #1
 void resolver(char** matriz, int size, int columnas){
-  for(int i = 0; i < columnas; i++){
-    for(int j = 0; j < size; j++){
+  for(int i = 0; i < size; i++){
+    for(int j = 0; j < columnas; j++){
       if (j != 0 || j != columnas - 1){
           if (matriz[i-1][j] == '^' && matriz[i-1][j-1] == '^' && matriz[i-1][j+1] == '.'){
               matriz[i][j] = '^';
-                }
-          if (matriz[i-1][j] == '^' && matriz[i-1][j-1] == '.' && matriz[i-1][j+1] == '^'){
-                    matriz[i][j] = '^';
-                }
-          if (matriz[i-1][j] == '.' && matriz[i-1][j-1] == '^' && matriz[i-1][j+1] == '.'){
-                    matriz[i][j] = '^';
-                }
-          if (matriz[i -1][j] == '.' && matriz[i-1][j-1] == '.' && matriz[i-1][j+1] == '^'){
-                    matriz[i][j] = '^';
           }
+
       }
       if (j == 0 || j == columnas - 1){
           if (j == 0){
               if (matriz[i-1][j] == '^' && matriz[i-1][j+1] == '^'){
                 matriz[i][j] = '^';
               }
-              if (matriz[i-1][j] == '.' && matriz[i-1][j+1] == '^'){
-                matriz[i][j] = '^';
-              }
           }
           if (j == columnas - 1){
               if (matriz[i -1][j] == '^' && matriz[i-1][j-1] == '^'){
-                matriz[i][j] = '^';
-              }
-              if (matriz[i -1][j] == '.' && matriz[i-1][j-1] == '^'){
                 matriz[i][j] = '^';
               }
           }
