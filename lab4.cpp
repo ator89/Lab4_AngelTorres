@@ -8,7 +8,7 @@ using std::string;
 //Crear Matriz de caracteres
 char** crearMatriz(int);
 //Inicializar matriz
-void initMatriz(char**,int);
+void initMatriz(char**,int,string);
 //Imprimir Matriz
 void printMatriz(char**,int);
 //Liberar Matriz
@@ -18,22 +18,27 @@ void validar(char**,int);
 
 int main(){
   int size = -1;
+  int length = 0;
+  
   char** matriz = NULL;
+  
   string fila;
-  char cadena[10];
 
   cout << "Ingrese la primera fila del salón: ";
-  cin >> cadena;
-
+  cin >> fila;
   
-  for(int i = 0; i < 10; i++){
-    cout << cadena[i];
+  for(int i = 0; i < fila.length(); i++){
+    cout << fila[i] << " " ;
   }
+  cout << endl;
 
-  matriz = crearMatriz(10);
-  initMatriz(matriz,10);
-  printMatriz(matriz,10);
-  liberarMatriz(matriz,10);
+  size = fila.length();
+
+
+  matriz = crearMatriz(size);
+  initMatriz(matriz,size,fila);
+  printMatriz(matriz,size);
+  liberarMatriz(matriz,size);
 
   return 0;
 }
@@ -54,9 +59,7 @@ void validar(char** matriz, int size){
         nuevaMatriz[i][j] = '^';
       }
     }
-  }
-  
-  
+  } 
 
 }
 
@@ -70,10 +73,10 @@ char** crearMatriz(int size){
 }
 
 //Inicializar matriz
-void initMatriz(char** matriz, int size){
+void initMatriz(char** matriz, int size, string fila){
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
-      matriz[i][j] = '.';
+      matriz[i][j] = fila[i];
     }
   }
 }
